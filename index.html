@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Великі географічні відкриття на карті світу</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <h1>Великі географічні відкриття<br><span>на карті світу</span></h1>
+      <p class="subtitle">Туристичний маршрут пам’яті XV–XVII століть</p>
+    </div>
+  </header>
+
+  <main>
+    <aside class="sidebar">
+      <div class="dates-box">
+        <h2>Ключові дати</h2>
+        <ul class="dates-list">
+          <li><strong>XV–XVII ст.</strong><br>Період Великих географічних відкриттів</li>
+          <li><strong>1492 р.</strong><br>Відкриття Америки Х. Колумбом</li>
+          <li><strong>1497–1498 рр.</strong><br>Відкриття морського шляху до Індії</li>
+          <li><strong>1519–1522 рр.</strong><br>Навколосвітня подорож Ф. Магеллана</li>
+        </ul>
+      </div>
+
+      <div class="locations-box">
+        <h2>Точки маршруту</h2>
+        <div id="locations-list"></div>
+      </div>
+    </aside>
+
+    <section class="map-section">
+      <div id="map"></div>
+      <div class="map-legend">
+        <span class="legend-item"><span class="dot columbus"></span> Колумб</span>
+        <span class="legend-item"><span class="dot gama"></span> Васко да Гама</span>
+        <span class="legend-item"><span class="dot magellan"></span> Магеллан</span>
+        <span class="legend-item"><span class="dot general"></span> Загальні</span>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Онлайн-проєкт туристичного маршруту · Створено за завданням підручника</p>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
