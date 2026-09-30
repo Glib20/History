@@ -1,167 +1,234 @@
-const locations = [
+const rooms = [
   {
-    id: 1,
-    name: "Лісабон (Белен), Португалія",
-    type: "general",
-    typeLabel: "Загальні",
-    lat: 38.6936,
-    lng: -9.2058,
-    description: "Головна «столиця відкриттів». Пам’ятник відкриттям (Padrão dos Descobrimentos), Башта Белен, Монастир ієронімітів (поховання Васко да Гами), Морський музей. Звідси стартували експедиції да Гами."
+    id: 'hallway',
+    name: 'Передпокій',
+    icon: '🚪',
+    subtitle: 'Місце, де починається день',
+    bg: 'linear-gradient(135deg, #4a5568, #2d3748, #1a202c)',
+    description: 'Передпокій — перше, що бачить гість. Тут зберігається верхній одяг, взуття, парасольки та ключі. Часто є дзеркало і невелика полиця.',
+    facts: [
+      { title: 'Типовий розмір', text: '3–6 м² у сучасних квартирах' },
+      { title: 'Обов’язкові елементи', text: 'Вішалка, полиця для взуття, дзеркало' },
+      { title: 'Цікаво', text: 'У будинках 1960–80-х передпокій був дуже вузьким' }
+    ],
+    hotspots: [
+      { label: '🧥 Вішалка', tip: 'Тут висить пальто, куртки та шарфи.' },
+      { label: '👟 Полиця для взуття', tip: 'Місце для кросівок, черевиків і капців.' },
+      { label: '🔑 Ключниця', tip: 'Щоб ніколи не шукати ключі.' }
+    ]
   },
   {
-    id: 2,
-    name: "Севілья, Іспанія",
-    type: "magellan",
-    typeLabel: "Магеллан",
-    lat: 37.3826,
-    lng: -5.9963,
-    description: "Звідси 10 серпня 1519 р. вийшла флотилія Магеллана. Генеральний архів Індій — головне сховище документів про відкриття. Кафедральний собор претендує на поховання Колумба."
+    id: 'living',
+    name: 'Вітальня',
+    icon: '🛋️',
+    subtitle: 'Серце дому та місце відпочинку',
+    bg: 'linear-gradient(135deg, #744210, #975a16, #c05621)',
+    description: 'Вітальня — головна кімната. Тут збирається сім’я, дивляться телевізор, приймають гостей. Часто поєднана з кухнею або окрема.',
+    facts: [
+      { title: 'Меблі', text: 'Диван, столик, телевізор, стелаж' },
+      { title: 'Стиль', text: 'Від класики до мінімалізму та лофту' },
+      { title: 'Цікаво', text: 'У хрущовках вітальня була єдиною кімнатою' }
+    ],
+    hotspots: [
+      { label: '📺 Телевізор', tip: 'Центр вечірнього дозвілля.' },
+      { label: '🛋️ Диван', tip: 'Найулюбленіше місце в домі.' },
+      { label: '📚 Полиці', tip: 'Книги, фото, сувеніри з подорожей.' }
+    ]
   },
   {
-    id: 3,
-    name: "Палос-де-ла-Фронтера, Іспанія",
-    type: "columbus",
-    typeLabel: "Колумб",
-    lat: 37.2285,
-    lng: -6.8934,
-    description: "Місце відправлення Колумба 3 серпня 1492 р. Монастир Ла-Рабіда, де Колумб готувався до плавання, та пам’ятники каравелам."
+    id: 'kitchen',
+    name: 'Кухня',
+    icon: '🍳',
+    subtitle: 'Аромат дому та сімейні традиції',
+    bg: 'linear-gradient(135deg, #276749, #2f855a, #48bb78)',
+    description: 'Кухня — одна з найважливіших кімнат. Тут готують, снідають і спілкуються. У старих квартирах 6–9 м², у нових — просторіші.',
+    facts: [
+      { title: 'Техніка', text: 'Плита, холодильник, мікро downstream' },
+      { title: 'Зони', text: 'Робоча, обідня, зберігання' },
+      { title: 'Цікаво', text: 'У радянські часи кухня була місцем розмов' }
+    ],
+    hotspots: [
+      { label: '☕ Кавоварка', tip: 'Ранок починається з кави.' },
+      { label: '🧊 Холодильник', tip: 'Сховище продуктів.' },
+      { label: '🍽️ Обідній стіл', tip: 'Місце сімейних розмов.' }
+    ]
   },
   {
-    id: 4,
-    name: "Барселона, Іспанія",
-    type: "columbus",
-    typeLabel: "Колумб",
-    lat: 41.3758,
-    lng: 2.1778,
-    description: "Монумент Колумбу (1888) на площі Портал-де-ла-Пау — одна з найвідоміших статуй мореплавця у світі. Можна піднятися на оглядовий майданчик."
+    id: 'bedroom',
+    name: 'Спальня',
+    icon: '🛏️',
+    subtitle: 'Особистий простір і місце відновлення',
+    bg: 'linear-gradient(135deg, #44337a, #553c9a, #6b46c1)',
+    description: 'Спальня — приватна зона відпочинку. Важливо раціонально використовувати простір: шафа-купе, ліжко з ящиками, спокійні кольори.',
+    facts: [
+      { title: 'Основне', text: 'Ліжко, шафа, тумбочки, освітлення' },
+      { title: 'Атмосфера', text: 'Спокійні кольори, м’яке світло' },
+      { title: 'Цікаво', text: 'Багато хто робить тут міні-кабінет' }
+    ],
+    hotspots: [
+      { label: '🛏️ Ліжко', tip: 'Якісний матрац — запорука сну.' },
+      { label: '👗 Шафа', tip: 'Місце для одягу.' },
+      { label: '💡 Нічник', tip: 'М’яке світло для читання.' }
+    ]
   },
   {
-    id: 5,
-    name: "Генуя, Італія",
-    type: "columbus",
-    typeLabel: "Колумб",
-    lat: 44.4056,
-    lng: 8.9463,
-    description: "Батьківщина Христофора Колумба. Будинок-музей Колумба та кілька пам’ятників у центрі міста."
+    id: 'bathroom',
+    name: 'Ванна кімната',
+    icon: '🚿',
+    subtitle: 'Зона гігієни та ранкових ритуалів',
+    bg: 'linear-gradient(135deg, #2b6cb0, #3182ce, #63b3ed)',
+    description: 'Ванна — місце ранкових і вечірніх процедур. У старих будинках часто суміщений санвузол, у нових — роздільний.',
+    facts: [
+      { title: 'Типи', text: 'Суміщений або роздільний' },
+      { title: 'Обов’язкове', text: 'Умивальник, душ/ванна, унітаз' },
+      { title: 'Цікаво', text: 'У хрущовках ванна була лише 2–3 м²' }
+    ],
+    hotspots: [
+      { label: '🪞 Дзеркало', tip: 'Тут починається день.' },
+      { label: '🚿 Душ', tip: 'Швидкий спосіб освіжитися.' },
+      { label: '🧴 Полиці', tip: 'Шампуні, гелі, креми.' }
+    ]
   },
   {
-    id: 6,
-    name: "Санто-Домінго, Домініканська Республіка",
-    type: "columbus",
-    typeLabel: "Колумб",
-    lat: 18.4861,
-    lng: -69.9312,
-    description: "Faro a Colón (Маяк Колумба) — величезний пам’ятник і музей, збудований до 500-річчя відкриття Америки. Перше постійне європейське поселення в Новому Світі."
-  },
-  {
-    id: 7,
-    name: "Мис Доброї Надії, ПАР",
-    type: "gama",
-    typeLabel: "Васко да Гама",
-    lat: -34.3568,
-    lng: 18.4739,
-    description: "Обхідний Бартоломеу Діашем (1488), а потім Васко да Гамою. Ключова точка на шляху з Європи до Індії навколо Африки."
-  },
-  {
-    id: 8,
-    name: "Кожикоде (Калікут), Індія",
-    type: "gama",
-    typeLabel: "Васко да Гама",
-    lat: 11.2588,
-    lng: 75.7804,
-    description: "Місце прибуття Васко да Гами 20 травня 1498 р. Тут європейці вперше висадилися в Індії морським шляхом. Збереглися пам’ятні знаки."
-  },
-  {
-    id: 9,
-    name: "Себу / Мактан, Філіппіни",
-    type: "magellan",
-    typeLabel: "Магеллан",
-    lat: 10.3111,
-    lng: 123.8917,
-    description: "Хрест Магеллана та місце його загибелі у 1521 р. Меморіал і статуя вождя Лапу-Лапу, який переміг іспанців."
-  },
-  {
-    id: 10,
-    name: "Пунта-Аренас, Чилі",
-    type: "magellan",
-    typeLabel: "Магеллан",
-    lat: -53.1638,
-    lng: -70.9171,
-    description: "Статуя Магеллана на головній площі. Музей Nao Victoria з репліками кораблів. Поруч — Магелланова протока, названа на його честь."
+    id: 'balcony',
+    name: 'Балкон / Лоджія',
+    icon: '🌿',
+    subtitle: 'Острівець свіжого повітря в місті',
+    bg: 'linear-gradient(135deg, #2f855a, #38a169, #68d391)',
+    description: 'Балкон — улюблене місце багатьох. Тут п’ють каву, вирощують квіти або просто дивляться на місто. Часто утеплюють.',
+    facts: [
+      { title: 'Використання', text: 'Відпочинок, рослини, зберігання' },
+      { title: 'Тренд', text: 'Утеплення та скління' },
+      { title: 'Цікаво', text: 'У багатьох країнах балкон — обов’язковий' }
+    ],
+    hotspots: [
+      { label: '🪴 Рослини', tip: 'Маленький сад у місті.' },
+      { label: '☕ Столик', tip: 'Кава з видом на місто.' },
+      { label: '🌅 Краєвид', tip: 'Сонце, дахи, шум міста.' }
+    ]
   }
 ];
 
-const colors = {
-  columbus: "#c53030",
-  gama: "#2b6cb0",
-  magellan: "#2f855a",
-  general: "#744210"
-};
+let currentIndex = 0;
 
-const map = L.map("map").setView([20, 0], 2);
+const intro = document.getElementById('intro');
+const tour = document.getElementById('tour');
+const startBtn = document.getElementById('start-btn');
+const roomView = document.getElementById('room-view');
+const roomTitle = document.getElementById('room-title');
+const infoTitle = document.getElementById('info-title');
+const infoText = document.getElementById('info-text');
+const factsContainer = document.getElementById('facts');
+const prevBtn = document.getElementById('prev-btn');
+const nextBtn = document.getElementById('next-btn');
+const dotsContainer = document.getElementById('dots');
+const menuBtn = document.getElementById('menu-btn');
+const roomMenu = document.getElementById('room-menu');
+const roomList = document.getElementById('room-list');
+const closeMenu = document.getElementById('close-menu');
 
-L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-  maxZoom: 18
-}).addTo(map);
+startBtn.addEventListener('click', () => {
+  intro.classList.remove('active');
+  tour.classList.add('active');
+  renderRoom(0);
+  createDots();
+  createRoomList();
+});
 
-const markers = {};
+prevBtn.addEventListener('click', () => {
+  if (currentIndex > 0) goToRoom(currentIndex - 1);
+});
 
-function createIcon(type) {
-  return L.divIcon({
-    className: "custom-marker",
-    html: `<div style="
-      background: ${colors[type]};
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      border: 3px solid white;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
-    "></div>`,
-    iconSize: [22, 22],
-    iconAnchor: [11, 11],
-    popupAnchor: [0, -12]
+nextBtn.addEventListener('click', () => {
+  if (currentIndex < rooms.length - 1) goToRoom(currentIndex + 1);
+});
+
+menuBtn.addEventListener('click', () => roomMenu.classList.add('active'));
+closeMenu.addEventListener('click', () => roomMenu.classList.remove('active'));
+roomMenu.addEventListener('click', e => {
+  if (e.target === roomMenu) roomMenu.classList.remove('active');
+});
+
+function createDots() {
+  dotsContainer.innerHTML = '';
+  rooms.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', () => goToRoom(i));
+    dotsContainer.appendChild(dot);
   });
 }
 
-locations.forEach(loc => {
-  const marker = L.marker([loc.lat, loc.lng], {
-    icon: createIcon(loc.type)
-  }).addTo(map);
+function createRoomList() {
+  roomList.innerHTML = '';
+  rooms.forEach((room, i) => {
+    const item = document.createElement('div');
+    item.className = 'room-item' + (i === 0 ? ' active' : '');
+    item.innerHTML = `<span>${room.icon}</span> ${room.name}`;
+    item.addEventListener('click', () => {
+      goToRoom(i);
+      roomMenu.classList.remove('active');
+    });
+    roomList.appendChild(item);
+  });
+}
 
-  const popupContent = `
-    <div class="popup-title">${loc.name}</div>
-    <span class="popup-type ${loc.type}">${loc.typeLabel}</span>
-    <p>${loc.description}</p>
+function goToRoom(index) {
+  if (index === currentIndex) return;
+  roomView.classList.add('fade-out');
+  setTimeout(() => {
+    currentIndex = index;
+    renderRoom(index);
+    roomView.classList.remove('fade-out');
+    updateNav();
+  }, 300);
+}
+
+function renderRoom(index) {
+  const room = rooms[index];
+  roomTitle.textContent = room.name;
+  infoTitle.textContent = room.name;
+  infoText.textContent = room.description;
+
+  factsContainer.innerHTML = room.facts.map(f => `
+    <div class="fact"><strong>${f.title}</strong>${f.text}</div>
+  `).join('');
+
+  roomView.innerHTML = `
+    <div class="room-bg" style="background:${room.bg}"></div>
+    <div class="room-overlay"></div>
+    <div class="room-content">
+      <div class="room-icon">${room.icon}</div>
+      <h2>${room.name}</h2>
+      <p class="subtitle">${room.subtitle}</p>
+      <div class="hotspots">
+        ${room.hotspots.map(h => `<div class="hotspot" data-tip="${h.tip}">${h.label}</div>`).join('')}
+      </div>
+    </div>
   `;
 
-  marker.bindPopup(popupContent);
-  markers[loc.id] = marker;
-});
-
-const listContainer = document.getElementById("locations-list");
-
-locations.forEach(loc => {
-  const card = document.createElement("div");
-  card.className = "location-card";
-  card.dataset.id = loc.id;
-
-  card.innerHTML = `
-    <span class="type ${loc.type}">${loc.typeLabel}</span>
-    <h3>${loc.name}</h3>
-    <p>${loc.description.substring(0, 90)}...</p>
-  `;
-
-  card.addEventListener("click", () => {
-    document.querySelectorAll(".location-card").forEach(c => c.classList.remove("active"));
-    card.classList.add("active");
-    map.setView([loc.lat, loc.lng], 6);
-    markers[loc.id].openPopup();
+  roomView.querySelectorAll('.hotspot').forEach(hs => {
+    hs.addEventListener('click', () => alert(hs.dataset.tip));
   });
 
-  listContainer.appendChild(card);
-});
+  updateNav();
+}
 
-setTimeout(() => {
-  map.invalidateSize();
-}, 200);
+function updateNav() {
+  prevBtn.style.opacity = currentIndex === 0 ? '0.4' : '1';
+  nextBtn.style.opacity = currentIndex === rooms.length - 1 ? '0.4' : '1';
+
+  document.querySelectorAll('.dot').forEach((dot, i) => {
+    dot.classList.toggle('active', i === currentIndex);
+  });
+  document.querySelectorAll('.room-item').forEach((item, i) => {
+    item.classList.toggle('active', i === currentIndex);
+  });
+}
+
+document.addEventListener('keydown', e => {
+  if (!tour.classList.contains('active')) return;
+  if (e.key === 'ArrowLeft' && currentIndex > 0) goToRoom(currentIndex - 1);
+  if (e.key === 'ArrowRight' && currentIndex < rooms.length - 1) goToRoom(currentIndex + 1);
+  if (e.key === 'Escape') roomMenu.classList.remove('active');
+});
